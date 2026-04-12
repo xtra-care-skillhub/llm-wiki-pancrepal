@@ -1,0 +1,12 @@
+[submodule "reference_repo/nvk-llm-wiki"]
+	path = reference_repo/nvk-llm-wiki
+	url = https://github.com/nvk/llm-wiki.git
+[submodule "reference_repo/project1-llm-wiki-agent"]
+	path = reference_repo/project1-llm-wiki-agent
+	url = https://github.com/SamurAIGPT/llm-wiki-agent.git
+[submodule "reference_repo/project2-karpathy-llm-wiki"]
+	path = reference_repo/project2-karpathy-llm-wiki
+	url = https://github.com/astro-han/karpathy-llm-wiki.git
+[submodule "reference_repo/project3-obsidian-wiki"]
+	path = reference_repo/project3-obsidian-wiki
+	url = https://github.com/Ar9av/obsidian-wiki.git
