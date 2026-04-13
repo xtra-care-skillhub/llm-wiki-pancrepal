@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xtra-care-skillhub.org/schemas/medical_ast.node.schema.json",
+  "title": "MedicalASTNode",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "node_id",
+    "node_type",
+    "label",
+    "provenance",
+    "source_id",
+    "evidence_span"
+  ],
+  "properties": {
+    "node_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "node_type": {
+      "type": "string",
+      "enum": [
+        "patient_case",
+        "demographics",
+        "diagnosis",
+        "staging",
+        "biomarker",
+        "treatment",
+        "surgery",
+        "chemotherapy",
+        "radiotherapy",
+        "targeted_therapy",
+        "immunotherapy",
+        "adverse_event",
+        "follow_up",
+        "recurrence",
+        "metastasis",
+        "outcome",
+        "lab_result",
+        "imaging_result",
+        "medication",
+        "nutrition",
+        "mental_support",
+        "claim"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "provenance": {
+      "type": "string",
+      "enum": [
+        "extracted",
+        "inferred",
+        "ambiguous"
+      ]
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "locator"
+      ],
+      "properties": {
+        "locator": {
+          "type": "string",
+          "description": "例如 page:3#L12-L20 / ts:00:01:20-00:01:36 / paragraph:5"
+        },
+        "quote": {
+          "type": "string"
+        },
+        "offset_start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "offset_end": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "source_authority": {
+      "type": "string",
+      "description": "如 guideline_consensus / association / specialist / public_search"
+    },
+    "evidence_grade": {
+      "type": "string",
+      "description": "如 A1/A2/B1/B2..."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
