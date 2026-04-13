@@ -1,0 +1,218 @@
+{
+  "snapshot_id": "snapshot-pdac-2026-04-14-001",
+  "generated_at": "2026-04-14T07:00:00+08:00",
+  "version": "medical-ast-v0",
+  "scope": "pdac",
+  "source_manifest_hash": "sha256:demo-manifest-hash",
+  "nodes": [
+    {
+      "node_id": "case_001",
+      "node_type": "patient_case",
+      "label": "患者病例#001",
+      "attributes": {
+        "sex": "female",
+        "age": 58,
+        "diagnosis_date": "2026-01-12"
+      },
+      "provenance": "extracted",
+      "source_id": "src_case_note_001",
+      "evidence_span": {
+        "locator": "paragraph:1",
+        "quote": "58岁女性，2026-01-12确诊胰腺导管腺癌。"
+      },
+      "source_authority": "specialist",
+      "evidence_grade": "B1",
+      "created_at": "2026-04-14T07:00:00+08:00",
+      "updated_at": "2026-04-14T07:00:00+08:00"
+    },
+    {
+      "node_id": "diag_pdac_stage_iib",
+      "node_type": "diagnosis",
+      "label": "胰腺导管腺癌（PDAC）IIB期",
+      "attributes": {
+        "histology": "PDAC",
+        "stage": "IIB"
+      },
+      "provenance": "extracted",
+      "source_id": "src_pathology_001",
+      "evidence_span": {
+        "locator": "page:2#L12-L16",
+        "quote": "病理提示胰腺导管腺癌，临床分期IIB。"
+      },
+      "source_authority": "specialist",
+      "evidence_grade": "A2",
+      "created_at": "2026-04-14T07:00:00+08:00",
+      "updated_at": "2026-04-14T07:00:00+08:00"
+    },
+    {
+      "node_id": "bio_kras_g12d",
+      "node_type": "biomarker",
+      "label": "KRAS G12D",
+      "attributes": {
+        "gene": "KRAS",
+        "variant": "G12D"
+      },
+      "provenance": "extracted",
+      "source_id": "src_ngs_001",
+      "evidence_span": {
+        "locator": "page:1#L8-L10",
+        "quote": "检测到 KRAS G12D 突变。"
+      },
+      "source_authority": "specialist",
+      "evidence_grade": "A2",
+      "created_at": "2026-04-14T07:00:00+08:00",
+      "updated_at": "2026-04-14T07:00:00+08:00"
+    },
+    {
+      "node_id": "tx_folfirinox_6c",
+      "node_type": "chemotherapy",
+      "label": "mFOLFIRINOX（6周期）",
+      "attributes": {
+        "regimen": "mFOLFIRINOX",
+        "cycles": 6,
+        "start_date": "2026-02-01",
+        "end_date": "2026-05-20"
+      },
+      "provenance": "extracted",
+      "source_id": "src_treatment_plan_001",
+      "evidence_span": {
+        "locator": "paragraph:4",
+        "quote": "给予mFOLFIRINOX方案化疗6周期。"
+      },
+      "source_authority": "specialist",
+      "evidence_grade": "B1",
+      "created_at": "2026-04-14T07:00:00+08:00",
+      "updated_at": "2026-04-14T07:00:00+08:00"
+    },
+    {
+      "node_id": "ae_neutropenia_g3",
+      "node_type": "adverse_event",
+      "label": "3级中性粒细胞减少",
+      "attributes": {
+        "ctcae_grade": "3",
+        "event": "neutropenia"
+      },
+      "provenance": "extracted",
+      "source_id": "src_cycle4_note_001",
+      "evidence_span": {
+        "locator": "page:3#L4-L8",
+        "quote": "第4周期后出现3级中性粒细胞减少。"
+      },
+      "source_authority": "specialist",
+      "evidence_grade": "B1",
+      "created_at": "2026-04-14T07:00:00+08:00",
+      "updated_at": "2026-04-14T07:00:00+08:00"
+    },
+    {
+      "node_id": "claim_nutrition_high_protein",
+      "node_type": "claim",
+      "label": "高蛋白营养支持有助于耐受治疗",
+      "attributes": {
+        "statement": "高蛋白营养支持可能改善化疗耐受性"
+      },
+      "provenance": "inferred",
+      "source_id": "src_nutrition_review_001",
+      "evidence_span": {
+        "locator": "paragraph:9",
+        "quote": "营养状态改善与治疗完成率提高相关。"
+      },
+      "source_authority": "association",
+      "evidence_grade": "B2",
+      "created_at": "2026-04-14T07:00:00+08:00",
+      "updated_at": "2026-04-14T07:00:00+08:00"
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "e1",
+      "edge_type": "has_diagnosis",
+      "from_node_id": "case_001",
+      "to_node_id": "diag_pdac_stage_iib",
+      "confidence": 0.98,
+      "provenance": "extracted",
+      "source_id": "src_pathology_001",
+      "evidence_span": {
+        "locator": "page:2#L12-L16",
+        "quote": "病理提示胰腺导管腺癌，临床分期IIB。"
+      },
+      "source_authority": "specialist",
+      "evidence_grade": "A2",
+      "created_at": "2026-04-14T07:00:00+08:00",
+      "updated_at": "2026-04-14T07:00:00+08:00"
+    },
+    {
+      "edge_id": "e2",
+      "edge_type": "has_biomarker",
+      "from_node_id": "diag_pdac_stage_iib",
+      "to_node_id": "bio_kras_g12d",
+      "confidence": 0.97,
+      "provenance": "extracted",
+      "source_id": "src_ngs_001",
+      "evidence_span": {
+        "locator": "page:1#L8-L10",
+        "quote": "检测到 KRAS G12D 突变。"
+      },
+      "source_authority": "specialist",
+      "evidence_grade": "A2",
+      "created_at": "2026-04-14T07:00:00+08:00",
+      "updated_at": "2026-04-14T07:00:00+08:00"
+    },
+    {
+      "edge_id": "e3",
+      "edge_type": "received_treatment",
+      "from_node_id": "case_001",
+      "to_node_id": "tx_folfirinox_6c",
+      "confidence": 0.95,
+      "provenance": "extracted",
+      "source_id": "src_treatment_plan_001",
+      "evidence_span": {
+        "locator": "paragraph:4",
+        "quote": "给予mFOLFIRINOX方案化疗6周期。"
+      },
+      "source_authority": "specialist",
+      "evidence_grade": "B1",
+      "created_at": "2026-04-14T07:00:00+08:00",
+      "updated_at": "2026-04-14T07:00:00+08:00"
+    },
+    {
+      "edge_id": "e4",
+      "edge_type": "developed_adverse_event",
+      "from_node_id": "tx_folfirinox_6c",
+      "to_node_id": "ae_neutropenia_g3",
+      "confidence": 0.94,
+      "provenance": "extracted",
+      "source_id": "src_cycle4_note_001",
+      "evidence_span": {
+        "locator": "page:3#L4-L8",
+        "quote": "第4周期后出现3级中性粒细胞减少。"
+      },
+      "source_authority": "specialist",
+      "evidence_grade": "B1",
+      "created_at": "2026-04-14T07:00:00+08:00",
+      "updated_at": "2026-04-14T07:00:00+08:00"
+    },
+    {
+      "edge_id": "e5",
+      "edge_type": "related_to",
+      "from_node_id": "claim_nutrition_high_protein",
+      "to_node_id": "tx_folfirinox_6c",
+      "confidence": 0.62,
+      "provenance": "inferred",
+      "source_id": "src_nutrition_review_001",
+      "evidence_span": {
+        "locator": "paragraph:9",
+        "quote": "营养状态改善与治疗完成率提高相关。"
+      },
+      "source_authority": "association",
+      "evidence_grade": "B2",
+      "created_at": "2026-04-14T07:00:00+08:00",
+      "updated_at": "2026-04-14T07:00:00+08:00"
+    }
+  ],
+  "metrics": {
+    "node_count": 6,
+    "edge_count": 5,
+    "orphan_node_count": 0,
+    "ambiguous_edge_count": 0
+  }
+}

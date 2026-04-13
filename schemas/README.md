@@ -5,6 +5,7 @@
 - `medical_ast.node.schema.json`
 - `medical_ast.edge.schema.json`
 - `medical_ast.snapshot.schema.json`
+- 示例：`examples/medical_ast.sample.json`
 
 设计原则：
 1. graph 是派生层，必须可回溯到 `source_id + evidence_span`  
