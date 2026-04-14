@@ -5,6 +5,7 @@
 - `medical_ast.node.schema.json`
 - `medical_ast.edge.schema.json`
 - `medical_ast.snapshot.schema.json`
+- `medical_case_profile.schema.json`
 - 示例：`examples/medical_ast.sample.json`
 
 设计原则：

@@ -1,0 +1,154 @@
+{
+  "case_id": "pdac-case-001",
+  "profile_version": "v0.1",
+  "updated_at": "2026-04-14T17:00:00+08:00",
+  "patient_label": "患者A",
+  "basic_info": {
+    "name": "张某",
+    "sex": "female",
+    "age": 58,
+    "insurance": "城镇职工医保",
+    "allergies": ["无明确药物过敏史"],
+    "past_history": ["2型糖尿病"],
+    "family_history": ["父亲胃癌"]
+  },
+  "diagnosis": {
+    "cancer_type": "胰腺导管腺癌",
+    "stage": "IIB",
+    "tnm": "cT3N1M0",
+    "confirmed_at": "2026-01-12",
+    "confirmed_hospital": "某三甲医院",
+    "mdt_summary": "建议先行系统治疗后评估手术机会"
+  },
+  "pathology_and_genomics": {
+    "pathology": {
+      "histology": "PDAC",
+      "grade": "中分化",
+      "ihc_markers": [
+        { "marker": "PD-L1", "value": "<1%" },
+        { "marker": "MSI", "value": "稳定" }
+      ]
+    },
+    "genomic_findings": [
+      { "gene": "KRAS", "variant": "G12D", "clinical_significance": "oncogenic" },
+      { "gene": "TP53", "variant": "p.R175H", "clinical_significance": "pathogenic" }
+    ],
+    "drug_response_genes": [
+      {
+        "gene": "UGT1A1",
+        "allele_or_genotype": "*1/*28",
+        "related_drug": "伊立替康",
+        "effect_type": "toxicity",
+        "clinical_note": "需关注中性粒细胞减少和腹泻风险"
+      }
+    ]
+  },
+  "treatment_history": [
+    {
+      "treatment_type": "chemotherapy",
+      "regimen": "mFOLFIRINOX",
+      "start_date": "2026-02-01",
+      "end_date": "2026-05-20",
+      "hospital": "某三甲医院",
+      "response": "部分缓解"
+    }
+  ],
+  "imaging_tracking": {
+    "imaging_records": [
+      {
+        "modality": "CT",
+        "date": "2026-04-10",
+        "finding_summary": "胰头占位较前缩小",
+        "lesion_size": "2.8cm"
+      }
+    ],
+    "dicom_metadata": [
+      {
+        "study_date": "2026-04-10",
+        "modality": "CT",
+        "series_description": "Abdomen Contrast",
+        "slice_thickness": 1.0,
+        "device": "GE"
+      }
+    ]
+  },
+  "lab_and_marker_tracking": {
+    "tumor_markers": [
+      {
+        "name": "CA19-9",
+        "unit": "U/mL",
+        "reference_range": "<37",
+        "values": [
+          { "date": "2026-01-12", "value": 860, "flag": "high" },
+          { "date": "2026-04-12", "value": 210, "flag": "high" }
+        ]
+      }
+    ],
+    "blood_routine": [
+      {
+        "name": "ANC",
+        "unit": "10^9/L",
+        "values": [
+          { "date": "2026-03-18", "value": 1.1, "flag": "low" }
+        ]
+      }
+    ]
+  },
+  "medication_and_safety": {
+    "current_medications": [
+      {
+        "drug_name": "奥美拉唑",
+        "dose": "20mg",
+        "frequency": "qd",
+        "route": "po",
+        "purpose": "胃保护"
+      }
+    ],
+    "adverse_effects": [
+      {
+        "event": "中性粒细胞减少",
+        "grade": "G3",
+        "related_drug": "伊立替康",
+        "management": "升白治疗 + 延迟下一周期"
+      }
+    ],
+    "safety_reminders": [
+      "化疗后骨髓抑制期注意感染预警",
+      "如腹泻加重需及时就医"
+    ]
+  },
+  "complications_and_risk": {
+    "known_risks": ["感染风险", "血栓风险", "营养不良风险"],
+    "prevention_plan": ["定期血常规监测", "活动与补液", "营养筛查"],
+    "warning_signs": ["发热", "呼吸困难", "持续腹泻"]
+  },
+  "nutrition": {
+    "weight_history": [
+      { "date": "2026-01-12", "weight_kg": 56.0 },
+      { "date": "2026-04-12", "weight_kg": 53.5 }
+    ],
+    "bmi": 20.1,
+    "pg_sga_score": 6,
+    "nutrition_plan": "高蛋白、小餐多次、必要时口服营养补充"
+  },
+  "psychology": {
+    "scales": [
+      {
+        "scale_name": "HADS",
+        "date": "2026-04-12",
+        "score": "A=9,D=7",
+        "interpretation": "焦虑轻中度，抑郁临界"
+      }
+    ],
+    "psychological_support_notes": "建议持续心理支持与睡眠管理"
+  },
+  "follow_up_and_surveillance": {
+    "follow_up_plan": "每2-3月复查影像和CA19-9",
+    "next_visit_date": "2026-05-15",
+    "surveillance_notes": "关注复发与肝转移风险"
+  },
+  "citations": [
+    { "source_id": "src_pathology_001", "locator": "page:2#L12-L16" },
+    { "source_id": "src_ngs_001", "locator": "page:1#L8-L10" }
+  ]
+}

@@ -1,0 +1,332 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xtra-care-skillhub.org/schemas/medical_case_profile.schema.json",
+  "title": "MedicalCaseProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "profile_version",
+    "updated_at",
+    "basic_info",
+    "diagnosis",
+    "pathology_and_genomics",
+    "treatment_history",
+    "lab_and_marker_tracking",
+    "medication_and_safety",
+    "nutrition",
+    "psychology"
+  ],
+  "properties": {
+    "case_id": { "type": "string", "minLength": 1 },
+    "profile_version": { "type": "string", "minLength": 1 },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "patient_label": { "type": "string" },
+    "basic_info": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": { "type": "string" },
+        "sex": { "type": "string" },
+        "age": { "type": "integer", "minimum": 0 },
+        "birth_date": { "type": "string", "format": "date" },
+        "contact": { "type": "string" },
+        "insurance": { "type": "string" },
+        "allergies": { "type": "array", "items": { "type": "string" } },
+        "past_history": { "type": "array", "items": { "type": "string" } },
+        "family_history": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "diagnosis": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "cancer_type": { "type": "string" },
+        "subtype": { "type": "string" },
+        "stage": { "type": "string" },
+        "tnm": { "type": "string" },
+        "confirmed_at": { "type": "string", "format": "date" },
+        "confirmed_hospital": { "type": "string" },
+        "mdt_summary": { "type": "string" },
+        "recurrence_status": { "type": "string" },
+        "metastasis_sites": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "pathology_and_genomics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pathology": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "histology": { "type": "string" },
+            "grade": { "type": "string" },
+            "ihc_markers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "marker": { "type": "string" },
+                  "value": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "genomic_findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "gene": { "type": "string" },
+              "variant": { "type": "string" },
+              "clinical_significance": { "type": "string" }
+            }
+          }
+        },
+        "drug_response_genes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "gene": { "type": "string" },
+              "allele_or_genotype": { "type": "string" },
+              "related_drug": { "type": "string" },
+              "effect_type": {
+                "type": "string",
+                "enum": ["toxicity", "sensitivity", "metabolism", "interaction", "other"]
+              },
+              "clinical_note": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "treatment_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "treatment_type": {
+            "type": "string",
+            "enum": ["surgery", "chemotherapy", "radiotherapy", "targeted_therapy", "immunotherapy", "intervention", "clinical_trial", "other"]
+          },
+          "regimen": { "type": "string" },
+          "start_date": { "type": "string", "format": "date" },
+          "end_date": { "type": "string", "format": "date" },
+          "hospital": { "type": "string" },
+          "response": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "imaging_tracking": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "imaging_records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "modality": { "type": "string" },
+              "date": { "type": "string", "format": "date" },
+              "finding_summary": { "type": "string" },
+              "lesion_size": { "type": "string" }
+            }
+          }
+        },
+        "dicom_metadata": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "study_date": { "type": "string" },
+              "modality": { "type": "string" },
+              "series_description": { "type": "string" },
+              "slice_thickness": { "type": ["number", "string"] },
+              "device": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "lab_and_marker_tracking": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tumor_markers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/measurement_series" }
+        },
+        "blood_routine": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/measurement_series" }
+        },
+        "liver_kidney_function": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/measurement_series" }
+        },
+        "infection_and_coagulation": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/measurement_series" }
+        },
+        "glucose_and_metabolism": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/measurement_series" }
+        }
+      }
+    },
+    "medication_and_safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "current_medications": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/medication_item" }
+        },
+        "historical_medications": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/medication_item" }
+        },
+        "adverse_effects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "event": { "type": "string" },
+              "grade": { "type": "string" },
+              "related_drug": { "type": "string" },
+              "management": { "type": "string" }
+            }
+          }
+        },
+        "interaction_alerts": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "safety_reminders": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "complications_and_risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "known_risks": { "type": "array", "items": { "type": "string" } },
+        "prevention_plan": { "type": "array", "items": { "type": "string" } },
+        "warning_signs": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "nutrition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "weight_history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "date": { "type": "string", "format": "date" },
+              "weight_kg": { "type": "number" }
+            },
+            "required": ["date", "weight_kg"]
+          }
+        },
+        "bmi": { "type": "number" },
+        "pg_sga_score": { "type": ["integer", "string"] },
+        "nutrition_plan": { "type": "string" }
+      }
+    },
+    "psychology": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scales": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "scale_name": { "type": "string" },
+              "date": { "type": "string", "format": "date" },
+              "score": { "type": ["number", "string"] },
+              "interpretation": { "type": "string" }
+            }
+          }
+        },
+        "psychological_support_notes": { "type": "string" }
+      }
+    },
+    "follow_up_and_surveillance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "follow_up_plan": { "type": "string" },
+        "next_visit_date": { "type": "string", "format": "date" },
+        "surveillance_notes": { "type": "string" }
+      }
+    },
+    "citations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id"],
+        "properties": {
+          "source_id": { "type": "string" },
+          "locator": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "measurement_series": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "values"],
+      "properties": {
+        "name": { "type": "string" },
+        "unit": { "type": "string" },
+        "reference_range": { "type": "string" },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["date", "value"],
+            "properties": {
+              "date": { "type": "string", "format": "date" },
+              "value": { "type": ["number", "string"] },
+              "flag": { "type": "string", "enum": ["high", "low", "normal", "unknown"] }
+            }
+          }
+        }
+      }
+    },
+    "medication_item": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "drug_name": { "type": "string" },
+        "dose": { "type": "string" },
+        "frequency": { "type": "string" },
+        "route": { "type": "string" },
+        "start_date": { "type": "string", "format": "date" },
+        "end_date": { "type": "string", "format": "date" },
+        "purpose": { "type": "string" }
+      }
+    }
+  }
+}
