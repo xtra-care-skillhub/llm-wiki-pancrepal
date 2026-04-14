@@ -70,6 +70,14 @@
 - [ ] `report.notify(case_id, channel)` 提醒接线
 - [ ] 变更摘要生成（新增/删除/证据等级变化）
 - [ ] 高风险低证据段落折叠策略
+- [ ] `report` 配置化（default_format/auto_generate/output_dir/notify_on_update）
+- [ ] 患者资料模板 `my_records/` 初始化命令或模板复制
+
+### Lane B7：医疗输入类型扩展（吸收 xiaoyibao）
+- [ ] DICOM 元数据解析（日期/序列/设备/层厚）
+- [ ] docx/xlsx 结构化抽取接入 normalize
+- [ ] 时间线抽取器（metadata + content + filename）
+- [ ] 图谱双层视图（timeline + topic）
 
 ---
 

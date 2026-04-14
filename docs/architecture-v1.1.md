@@ -352,10 +352,27 @@ pancrepal-wiki/
 扩展为：
 - `source.transport ∈ {url, file, pasted_text}`
 - `source.content_type ∈ {text, markdown, pdf, image, screenshot, diagram, scanned_pdf, chat_export, transcript, raw_draft}`
+- `source.content_type ∈ {text, markdown, pdf, scanned_pdf, image, screenshot, diagram, dicom, docx, xlsx, chat_export, transcript, raw_draft, url_ref}`
 
 其中：
 - `screenshot / diagram / scanned_pdf` 虽可归入 image/pdf，但为了后续策略分流，建议保留显式枚举值。
+- `dicom / docx / xlsx` 在患者资料中是高频输入，必须一等支持。
 - 多模态来源写入 wiki 时，必须更严格地使用 `provenance` 标记，避免把图像解释结果误写为确定事实。
+
+### 2.5.6 医疗图谱采用“双层结构”
+
+吸收 xiaoyibao 设计后，医疗图谱建议固定为双层：
+
+1. **时间线层（全局）**
+   - 按日期组织诊疗事件（确诊、治疗、复查、复发、并发症）
+   - 时间来源可来自：文档元数据、正文日期、文件名日期、DICOM 元数据
+
+2. **主题层（时间点内）**
+   - 在每个时间段内按主题展开：诊断、治疗、基因/病理、标志物、影像、风险、营养、心理
+
+这样可同时满足：
+- 医生侧：快速看“时间序列演进”
+- 患者侧：快速看“某主题全貌”
 
 ### 2.5.2 URL Ingest 作为重点能力
 
@@ -993,3 +1010,30 @@ self-improvement/
 - 报告必须包含：`updated_at`、`source_count`、`citations`、`evidence_grade_distribution`
 - 高风险低证据内容默认折叠并标注“需复核”
 - 报告是派生层，不得反写原始证据层
+
+### 16.6 输出与提醒配置（推荐）
+
+建议在项目配置中支持：
+
+```toml
+[report]
+default_format = "md"        # md | html | pdf
+auto_generate = true         # ingest/update 后自动生成
+output_dir = "report-out"    # 输出目录
+notify_on_update = true      # 更新后提醒
+```
+
+### 16.7 患者侧目录模板（建议内置）
+
+建议提供 `my_records/` 初始化模板（`init` 命令或模板复制），至少覆盖：
+- 基础信息
+- 确诊信息
+- 基因与病理详情（含 UGT1A1/DPYD/TPMT_NUDT15/CYP 等）
+- 治疗记录（手术/化疗/放疗/靶向/免疫/临床试验）
+- 影像资料（含 DICOM）
+- 检验指标与趋势曲线
+- 用药与副作用提醒
+- 并发症风险管理
+- 营养评估（含 PG-SGA）
+- 心理评估（含 HADS/PHQ-9/GAD-7）
+- 随访与复发监测
