@@ -951,3 +951,45 @@ self-improvement/
 - 所有医学结论必须可追溯到证据
 - 变更必须写入 evolution-log
 - 新 skill 必须符合 contract schema
+
+## 16. 患者病情报告导出与动态更新（新增）
+
+新增一个患者侧高频能力：**病情整理报告导出 + 自动更新提醒**。
+
+### 16.1 导出格式（3选）
+- `markdown`（默认）
+- `html`
+- `pdf`
+
+### 16.2 最小接口
+- `report.generate(case_id, format=md)`
+- `report.update(case_id)`（增量重编译）
+- `report.notify(case_id, channel)`（更新提醒）
+
+### 16.3 动态更新触发
+当发生以下事件时触发对应病例报告更新：
+- `ingest`
+- `retract / restrict / archive`
+- `recompile`
+
+更新动作：
+1. 定位受影响 `case_id`
+2. 重建报告（默认 md，可选 html/pdf）
+3. 生成变更摘要（新增/删除/证据等级变化）
+4. 推送提醒（站内 / 飞书 / 微信）
+
+### 16.4 报告结构（与患者目录模板对齐）
+- 基础信息
+- 治疗历史
+- 确诊信息
+- 基因与病理详情（含药物毒性基因如 UGT1A1、药敏性）
+- 标志物与影像记录/曲线
+- 并发症预防与风险
+- 用药与副作用提醒
+- 营养评估
+- 心理评估量表
+
+### 16.5 治理约束
+- 报告必须包含：`updated_at`、`source_count`、`citations`、`evidence_grade_distribution`
+- 高风险低证据内容默认折叠并标注“需复核”
+- 报告是派生层，不得反写原始证据层

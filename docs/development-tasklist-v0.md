@@ -64,6 +64,13 @@
 - [ ] OpenClaw/Hermes 最小 skill contract
 - [ ] Web/Feishu/WeChat 入口接线（消费已治理知识）
 
+### Lane B6：患者报告导出与动态更新
+- [ ] `report.generate(case_id, format)`（md/html/pdf，默认 md）
+- [ ] `report.update(case_id)` 增量重编译
+- [ ] `report.notify(case_id, channel)` 提醒接线
+- [ ] 变更摘要生成（新增/删除/证据等级变化）
+- [ ] 高风险低证据段落折叠策略
+
 ---
 
 ## C. Backlog（可延后）
